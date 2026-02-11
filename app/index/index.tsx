@@ -27,7 +27,7 @@ export default function Index() {
 
 const pages = [
   {
-    href: "/linear-search",
+    href: "/linear_search",
     text: "Linear Search",
     diff: 0,
   },

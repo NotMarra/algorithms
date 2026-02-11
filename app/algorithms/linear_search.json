@@ -1,0 +1,10 @@
+{
+  "title": "Linear Search",
+  "description": "Is a method for finding an element within a list. It sequentially checks each element of the list until a match is found or the whole list has been searched.",
+  "snippets": [
+    {
+      "language": "js",
+      "code": "function search(arr, x) {\n    const n = arr.length;\n    \n    for (let i = 0; i < n; i++)\n        if (arr[i] == x)\n            return i;\n    return -1;\n}"
+    }
+  ]
+}
