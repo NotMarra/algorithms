@@ -2,6 +2,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import type { Route } from "./+types/algorithm";
 import { Suspense, lazy } from "react";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 interface AlgorithmData {
   title: string;
@@ -28,6 +29,18 @@ export async function loader({
     throw new Response("Algoritmus nenalezen", { status: 404 });
   }
 }
+
+export function meta({ loaderData }: Route.MetaArgs) {
+  const data = loaderData as unknown as AlgorithmData;
+  return [
+    { title: data.title },
+    {
+      name: "description",
+      content: data.description,
+    },
+  ];
+}
+
 export default function Algorithm({
   loaderData,
   params,
@@ -39,9 +52,13 @@ export default function Algorithm({
   }
   return (
     <main className="flex flex-col mx-auto h-dvh max-w-6xl p-5">
-      <h1 className="font-bold text-3xl mb-4">
+      <a
+        href="/"
+        className="font-bold text-3xl mb-4 flex gap-2 hover:underline w-fit"
+      >
+        <IoIosArrowRoundBack className="size-10 my-auto" />
         {data.title || "Unknown Algorithm"}
-      </h1>
+      </a>
       <p className="text-white/75">{data.description}</p>
       <h3 className="mt-5 font-bold">Code snippet:</h3>
       <SyntaxHighlighter
@@ -54,6 +71,7 @@ export default function Algorithm({
           fontSize: "0.9rem",
         }}
         wrapLongLines={true}
+        showLineNumbers
       >
         {data.snippets[0].code}
       </SyntaxHighlighter>
